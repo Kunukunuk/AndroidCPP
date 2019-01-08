@@ -4,8 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
 
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_main, words);
+        ListView list = (ListView) findViewById(R.id.listView);
+        list.setAdapter(adapter);
+
         Button getStringButton = (Button) findViewById(R.id.getsringbutton);
         getStringButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 
             }
         });
+
     }
 
     /**
@@ -37,4 +46,5 @@ public class MainActivity extends AppCompatActivity {
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+    ArrayList<String> words = new ArrayList<String>();
 }
