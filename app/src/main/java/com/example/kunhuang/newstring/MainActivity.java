@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_main, words);
+        final ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, words);
         ListView list = (ListView) findViewById(R.id.listView);
         list.setAdapter(adapter);
 
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         getStringButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String word = stringFromJNI();
+                words.add(word);
+
+                ((ArrayAdapter) adapter).notifyDataSetChanged();
                 
             }
         });
