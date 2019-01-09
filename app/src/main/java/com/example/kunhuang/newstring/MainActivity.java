@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = (TextView) findViewById(R.id.sample_text);
         tv.setText(stringFromJNI());
 
-        final ListAdapter adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, words);
+        final ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, words);
         ListView list = (ListView) findViewById(R.id.listView);
         list.setAdapter(adapter);
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 words.add(word);
 
                 ((ArrayAdapter) adapter).notifyDataSetChanged();
-                
+
             }
         });
 
