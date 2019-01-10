@@ -1,5 +1,7 @@
 package com.example.kunhuang.newstring;
 
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
         System.loadLibrary("native-lib");
     }
 
+    private native String stringFromJNI(AssetManager mana);
+    ArrayList<String> words = new ArrayList<String>();
+    Button getStringButton;
+    private AssetManager aManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,17 +33,19 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        //tv.setText(stringFromJNI());
 
         final ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, words);
         ListView list = (ListView) findViewById(R.id.listView);
         list.setAdapter(adapter);
 
-        Button getStringButton = (Button) findViewById(R.id.getsringbutton);
+        aManager = getResources().getAssets();
+
+        getStringButton = (Button) findViewById(R.id.getsringbutton);
         getStringButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String word = stringFromJNI();
+                String word = stringFromJNI(aManager);
                 words.add(word);
 
                 ((ArrayAdapter) adapter).notifyDataSetChanged();
@@ -46,10 +55,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
-    ArrayList<String> words = new ArrayList<String>();
 }
