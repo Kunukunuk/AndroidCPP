@@ -5,6 +5,7 @@
 #include <android/log.h>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
+#include <vector>
 
 using namespace std;
 
@@ -33,7 +34,7 @@ Java_com_example_kunhuang_newstring_MainActivity_stringFromJNI(
         JNIEnv *env, jobject obj,
         jobject javAManager) {
 
-    //AAssetManager *mangr = AAssetManager_fromJava(env, javAManager);
+    AAssetManager *mangr = AAssetManager_fromJava(env, javAManager);
 
     string word = generateWord();
     //string word = "Hello from C++";
