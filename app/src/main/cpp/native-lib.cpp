@@ -52,10 +52,7 @@ Java_com_example_kunhuang_newstring_MainActivity_stringFromJNI(
 
     }
 
-    char *p = buffer.data();
-    char s = p[0];
-
     string word = generateWord();
     //string word = "Hello from C++";
-    return env->NewStringUTF("");
+    return env->NewStringUTF(word.c_str());
 }
