@@ -6,6 +6,7 @@
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -34,23 +35,7 @@ Java_com_example_kunhuang_newstring_MainActivity_stringFromJNI(
         JNIEnv *env, jobject obj,
         jobject javAManager) {
 
-    AAssetManager *mangr = AAssetManager_fromJava(env, javAManager);
-    AAssetDir* assetDir = AAssetManager_openDir(mangr, "");
 
-    const char* filename;
-    vector<char> buffer;
-
-    while ((filename = AAssetDir_getNextFileName(assetDir)) != NULL)
-    {
-        //search for desired file
-        if(!strcmp(filename, "EnglishWords.txt"))
-        {
-            AAsset *asset = AAssetManager_open(mangr, filename, AASSET_MODE_STREAMING);
-
-            //AAsset_close(asset);
-        }
-
-    }
 
     string word = generateWord();
     //string word = "Hello from C++";
